@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Navbar, NavbarBrand, NavItem, NavLink, Nav, NavbarToggler, Collapse, Tooltip} from 'reactstrap';
 import { BsFillPersonFill, BsSearch } from "react-icons/bs";
+import CartWidget from '../CartWidget/CartWidget';
 
 const NavBar = () => {
     const [collapsed, setCollapsed] = useState(true);
@@ -10,7 +11,7 @@ const NavBar = () => {
     <div>
       <Navbar color="faded" light expand="md">
         <NavbarBrand href="/" className="mr-auto logo">
-            <img title='Title company' src={process.env.PUBLIC_URL + 'logo.png'} alt='Logo Company' />
+            <img title='Title company' src={'logo.png'} alt='Logo Company' />
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar className=''>
@@ -34,6 +35,11 @@ const NavBar = () => {
                 <NavItem>
                     <NavLink href="/">
                         Contact
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink href='/'>
+                        <CartWidget />
                     </NavLink>
                 </NavItem>
                 <NavItem>
