@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Navbar, NavbarBrand, NavItem, NavLink, Nav, NavbarToggler, Collapse, Tooltip} from 'reactstrap';
+import { Navbar, NavbarBrand, NavItem, NavLink, Nav, NavbarToggler, Collapse} from 'reactstrap';
 import { BsFillPersonFill, BsSearch } from "react-icons/bs";
 import CartWidget from '../CartWidget/CartWidget';
 
@@ -15,12 +15,11 @@ const NavBar = () => {
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar className=''>
-          <Nav navbar className='ms-auto mb-2 mb-lg-0'>
-          <NavItem>
+            <Nav navbar className='ms-auto mb-2 mb-lg-0'>
+                <NavItem>
                     <NavLink href="/">
                         About Us
                     </NavLink>
-                    
                 </NavItem>
                 <NavItem>
                     <NavLink href="/">
