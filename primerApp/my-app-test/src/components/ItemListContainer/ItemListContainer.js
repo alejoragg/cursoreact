@@ -1,17 +1,22 @@
 import ItemList from '../ItemList/ItemList';
 import { Row } from 'reactstrap';
+import { useState, useEffect } from 'react'
+import { getProducts } from '../../asyncmock'
 
 const ItemListContainer = () => {
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        getProducts().then(response => {
+            setProducts(response)
+        })
+    }, [])
+
+    
     return(
         <div className="container mt-4">
             <Row>
-                <ItemList
-                    stock={8} 
-                    description={'With supporting text below as a natural lead-in to additional content.'} 
-                    image={'mac_render.png'} 
-                    alt='MacBook Pro'
-                    initial={1}
-                />
+                {products.map(product => <ItemList key={product.id} {...product} initial={1}/>)}
             </Row>
         </div>
     )

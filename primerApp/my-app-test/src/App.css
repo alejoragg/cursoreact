@@ -3,3 +3,4 @@ li.nav-item {margin: 0 5px 0 0;}
 li.nav-item:hover {border-bottom: 1px solid #ccc;}
 nav.navbar {box-shadow: 1px 1px 6px 0px #ccc;}
 .collapse.show .nav-item {text-align: center;}
+.image-thumb{height: 130px; background-size: cover; background-position: center;}
