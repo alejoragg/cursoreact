@@ -15,7 +15,7 @@ const NavBar = () => {
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar className=''>
-            <Nav navbar className='ms-auto mb-2 mb-lg-0'>
+            <Nav navbar className='ms-auto mb-2 mb-lg-0 text-center'>
                 <NavItem>
                     <NavLink href="/">
                         About Us
