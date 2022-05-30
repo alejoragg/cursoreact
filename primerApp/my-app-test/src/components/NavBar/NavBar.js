@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Navbar, NavbarBrand, NavItem, NavLink, Nav, NavbarToggler, Collapse} from 'reactstrap';
 import { BsFillPersonFill, BsSearch } from "react-icons/bs";
 import CartWidget from '../CartWidget/CartWidget';
-
+import { Link } from 'react-router-dom'
 const NavBar = () => {
     const [collapsed, setCollapsed] = useState(true);
     const toggleNavbar = () => setCollapsed(!collapsed);
@@ -11,33 +11,34 @@ const NavBar = () => {
     <div>
       <Navbar color="faded" light expand="md">
         <NavbarBrand href="/" className="mr-auto logo">
-            <img title='Title company' src={'logo.png'} alt='Logo Company' />
+            <img title='Title company' src={'/logo.png'} alt='Logo Company' />
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar className=''>
             <Nav navbar className='ms-auto mb-2 mb-lg-0 text-center'>
                 <NavItem>
-                    <NavLink href="/">
+                    {/*({isActive}) => isActive ? 'ActiveOption' : 'Option'*/}
+                    <Link to="/about" className='nav-link'>
                         About Us
-                    </NavLink>
+                    </Link>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="/">
-                        Prices
-                    </NavLink>
+                    <Link to="/category/apartment" className='nav-link'>
+                        Departamentos
+                    </Link>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="/">
-                        Services
-                    </NavLink>
+                    <Link to="/category/home" className='nav-link'>
+                        Casas
+                    </Link>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="/">
+                    <Link to="/contact" className='nav-link'>
                         Contact
-                    </NavLink>
+                    </Link>
                 </NavItem>
                 <NavItem>
-                    <NavLink href='/'>
+                    <NavLink to='/'>
                         <CartWidget />
                     </NavLink>
                 </NavItem>
