@@ -15,7 +15,7 @@ const ItemDetailContainer = ()=>{
         }).finally(()=>{
                 setSpinner(false)
          })
-    }, [])
+    }, [productId])
     if(spinner) {
         return <Spinner className="mt-4 spinner" animation="border" role="status" /> 
     }

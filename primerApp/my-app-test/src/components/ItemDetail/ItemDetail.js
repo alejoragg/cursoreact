@@ -1,13 +1,19 @@
 import ItemCount from '../ItemCount/ItemCount'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-const ItemDetail = ({ name, category, id, price, description, photos, stock }) => {
+import CartContext from '../../context/CartContext';
 
-    const [buttonCar, setButtonCar] = useState(false)
-    const handleCallback = (e) =>{
-        console.log('agregado al carro', e)
-        setButtonCar(true)
+const ItemDetail = ({ name, category, id, price, description, photos, stock }) => {
+    const [quantity, setQuantity] = useState(0)
+    const { addItem, getProduct } = useContext(CartContext)
+
+    const handleCallback = (quantity) =>{
+        console.log('agregado al carro', quantity)
+        setQuantity(quantity)
+        addItem({ id, name, price, quantity})
     }
+    console.log('ahora hay', quantity)
+
     return(
         <div className="content mt-4">
             <h2 className='text-center'>Detalle de producto</h2>
@@ -20,12 +26,10 @@ const ItemDetail = ({ name, category, id, price, description, photos, stock }) =
                     <div><b>Descripción:</b> {description}</div>
                     <div><b>Precio:</b> USD {price}</div>
                     <div><b>Stock:</b> {stock}</div>
-                    <div className=''>
-                        {!buttonCar ? <ItemCount initial={1} stock={stock} parentCallback={handleCallback}/> : null}
-                    </div>
-                    <div>
-                        {buttonCar ? <Link to="/cart" className='btn btn-outline-success'>Terminar compra</Link> : null}
-                    </div>
+                    { quantity > 0 
+                        ? <div><Link to="/cart" className='btn btn-outline-success'>Terminar compra</Link></div>
+                        : <div><ItemCount initial={getProduct(id)?.quantity} stock={stock} parentCallback={handleCallback}/></div>
+                    }
                 </div>
                 
             </div>
