@@ -12,7 +12,6 @@ const ItemDetail = ({ name, category, id, price, description, photos, stock }) =
         setQuantity(quantity)
         addItem({ id, name, price, quantity})
     }
-    console.log('ahora hay', quantity)
 
     return(
         <div className="content mt-4">

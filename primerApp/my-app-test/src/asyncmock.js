@@ -2,7 +2,7 @@ const products = [
     { 
         id: '1', 
         name: 'Casa en Av Santa Rosa', 
-        price: 90000, 
+        price: 1000, 
         category: 'home', 
         photos: [
             {
@@ -20,7 +20,7 @@ const products = [
     { 
         id: '2', 
         name: 'Departamento ubicado en Zona Centro', 
-        price: 5987323, 
+        price: 2000, 
         category: 'apartment', 
         photos: [
             {
@@ -38,7 +38,7 @@ const products = [
     { 
         id: '3', 
         name: 'Casa en Pilar', 
-        price: 12300321, 
+        price: 3000, 
         category: 'home', 
         photos: [
             {
