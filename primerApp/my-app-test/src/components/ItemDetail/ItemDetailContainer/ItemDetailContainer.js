@@ -1,19 +1,23 @@
 import { useState, useEffect } from 'react'
-import { getProductsById } from '../../../asyncmock'
+//import { getProductsById } from '../../../asyncmock'
 import ItemDetail from '../ItemDetail'
 import { useParams } from 'react-router-dom'
 import { Spinner } from 'reactstrap'
-
+import { getDoc, doc } from 'firebase/firestore'
+import { db } from '../../../services/firebase'
 const ItemDetailContainer = ()=>{
     const [product, setProduct] = useState()
     const { productId } = useParams()
     const [spinner, setSpinner] = useState(true)
 
     useEffect(() => {
-        getProductsById(productId).then(response => {
-            setProduct(response)
+        getDoc(doc(db, 'products', productId)).then(response => {
+            const product = { id: response.id, ...response.data() }
+            setProduct(product)
+        }).catch(error =>{
+            console.log(error)
         }).finally(()=>{
-                setSpinner(false)
+            setSpinner(false)
          })
     }, [productId])
     if(spinner) {

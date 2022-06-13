@@ -17,7 +17,7 @@ const ItemDetail = ({ name, category, id, price, description, photos, stock }) =
         <div className="content mt-4">
             <h2 className='text-center'>Detalle de producto</h2>
             <div className="row col-10 mx-auto mt-4">
-                <div className='image-thumb col-4' style={{backgroundImage:`url(${photos[0].thumb})`}}></div>
+                <div className='image-thumb col-4' style={{backgroundImage:`url(${photos})`}}></div>
                 <div className='col row'>
                     <div><b>Código:</b> {id}</div>
                     <div><b>Nombre ID:</b> {name}</div>

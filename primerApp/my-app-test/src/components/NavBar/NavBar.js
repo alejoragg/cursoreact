@@ -23,13 +23,13 @@ const NavBar = () => {
                     </Link>
                 </NavItem>
                 <NavItem>
-                    <Link to="/category/apartment" className='nav-link'>
-                        Departamentos
+                    <Link to="/category/celular" className='nav-link'>
+                        Celulares
                     </Link>
                 </NavItem>
                 <NavItem>
-                    <Link to="/category/home" className='nav-link'>
-                        Casas
+                    <Link to="/category/tablet" className='nav-link'>
+                        Tablets
                     </Link>
                 </NavItem>
                 <NavItem>

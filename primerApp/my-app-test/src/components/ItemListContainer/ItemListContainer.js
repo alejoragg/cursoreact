@@ -1,8 +1,9 @@
 import ItemList from '../ItemList/ItemList';
 import { Row, Spinner } from 'reactstrap';
 import { useState, useEffect } from 'react'
-import { getProducts, getProductsByCategory } from '../../asyncmock'
 import { useParams } from 'react-router-dom'
+import { getDocs, collection, query, where } from 'firebase/firestore';
+import { db } from '../../services/firebase';
 
 const ItemListContainer = ({greeting, handlePage}) => {
     const [products, setProducts] = useState([])
@@ -11,19 +12,24 @@ const ItemListContainer = ({greeting, handlePage}) => {
 
     useEffect(() => {
         setSpinner(true)
-        if(!categoryId) {
-            getProducts().then(response => {
-                setProducts(response)
-            }).finally(()=>{
-                setSpinner(false)
+        const collectionRef = categoryId
+            //Query, 2 argumentos, a que base y luego el filtro
+            ? query(collection(db, 'products'), where('category', '==', categoryId))// le puedo poner como 3er argumento un limit(xx)
+            : collection(db, 'products')
+
+        getDocs(collectionRef).then(response => {
+            //console.log(response)
+            const products = response.docs.map(docs => {
+                return { id: docs.id, ...docs.data() }
+                
             })
-        } else {
-            getProductsByCategory(categoryId).then(response => {
-                setProducts(response)
-            }).finally(()=>{
-                setSpinner(false)
-            })
-        }
+            console.log(products)
+            setProducts(products)
+        }).catch(error => {
+            console.log(error)
+        }).finally(()=>{
+            setSpinner(false)
+        })
     }, [categoryId])
 
     if(spinner) {
