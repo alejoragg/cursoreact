@@ -4,23 +4,35 @@ import { Button } from 'reactstrap'
 import { Link } from "react-router-dom"
 import { addDoc, collection, getDocs, query, where, documentId, writeBatch } from "firebase/firestore"
 import { db } from "../../services/firebase"
+import Modalview from "../Modal/ModalItemDetail"
+import { useEffect } from "react"
+import { useNotification } from '../../notification/Notification'
+import { Spinner } from "reactstrap"
 
 const Cart = () => {
     const {cart, removeItem, clearCart} = useContext(CartContext)
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState('')
-    
+    const [modalStatus, setModalStatus] = useState(false)
+    const [buyer, setBuyer] = useState({})
+    const { setNotification } = useNotification()
+
     let subtotal = 0
     const suma = (precio) => { 
         subtotal += precio
     }
-    const [buyer, setBuyer] = useState({
-        name: 'Test user',
-        email: 'email@gmail.com',
-        phone: '11233211233',
-        address: 'Lago Mayor 6'
-    })
 
+    const setBuyerModal = (e)=>{
+        setBuyer(e)
+    }
+
+    useEffect(()=>{
+        if(Object.keys(buyer).length > 0){
+            createOrder()
+        }
+    },[buyer])
+
+    const toggle = () => setModalStatus(!modalStatus);
     const createOrder = () => {
         setLoading(true)
         const objOrder = {
@@ -30,7 +42,6 @@ const Cart = () => {
         }
 
         const idCart = cart.map(prod => prod.id)
-        console.log(idCart)
         const batch = writeBatch(db)
         const noStock = []
         const collectionRef = collection(db, 'products')
@@ -56,17 +67,20 @@ const Cart = () => {
                 }
             }).then(({id})=>{
                 batch.commit()
-                setMessage(`El id de la orden es ${id}`)
+                setMessage(`Id de orden es ${id}`)
                 clearCart()
+                setNotification('success',`Se generó la orden`)
             }).catch(error => {
-                setMessage(`Algunos productos no tienen stock`)
+                setNotification('danger',`Algunos productos no tienen stock :(`)
             }).finally(() => {
                 setLoading(false)
             })
     }
+
     if(loading){
-        return <h1>Creando Orden</h1>
+        return <Spinner className="mt-4 spinner" animation="border" role="status" /> 
     } 
+    
     return(
         <div className="text-center mt-4">
             <h1>Carrito</h1>
@@ -92,8 +106,9 @@ const Cart = () => {
                             <div className="total my-4">Total: {subtotal}</div>
                             <div className="row">
                                 <div className="col"><Button onClick={()=>clearCart()} className="btn btn-outline-danger" outline>Limpiar Carro</Button></div>
-                                {/*<ContactForm setBuyer={setBuyer} />*/}
-                                <div className="col"><Button onClick={()=>createOrder()}>Generar Orden</Button></div>
+                                {/*<div className="col"><Button onClick={()=>createOrder()}>Generar Orden</Button></div>*/}
+                                <div className="col"><Button onClick={toggle}>Generar Orden</Button></div>
+                               <Modalview isOpen={modalStatus} toggle={toggle} setBuyer={setBuyerModal}/>
                             </div>
                         </div>
                             : <div className="mt-4">El carro esta vácio <br></br><Link to={'/'}>Puedes seguir comprando</Link></div>

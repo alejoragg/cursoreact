@@ -1,13 +1,22 @@
 <h1 align="center">Hola 👋, Soy Alejandro Aranguren</h1>
 <h3 align="center">Proyecto de prueba comision #31190</h3>
-
+<p>En este proyecto, podras ver el funcionamiento de un carrito de compras, donde agregaras productos a una base en Firebase, los consumes en el carrito y puedes generar un Orden de pedido.
+<p>Sigue leyendo para poder probar el proyecto</p>
+<p></p>
 <img src="./public/grabacion.gif">
 <p align="left">
 Para ejecutar el proyecto clonar el repo: https://alejoragg.github.io/cursoreact/
+<br>cd my-app-test
 
 Ejecutar en la consola <b>npm start</b><br>
 Por cualquier duda o consulta: alejoragg@gmail.com
 </p>
+<h3>Varibales de entorno FIREBASE</h3>
+Revisa un ejemplo en <a target="_blank" href="https://github.com/alejoragg/cursoreact/primerApp/my-app-test/.env.example">[`env.example`]</a>
+
+<h3>La estructura de los documentos de los productos debe ser la siguiente:</h3>
+<p>category, description, name, photos, price, stock</p>
+<p>Al generar una orden se creara una Coleccion en firebase llamada <b>Orders</b> que contendra las Ordenes de los pedidos y los datos del comprador</p>
 <h3>Librerias Utilizadas</h3>
 <p>
     "react-dom": "18.1.0"<br>

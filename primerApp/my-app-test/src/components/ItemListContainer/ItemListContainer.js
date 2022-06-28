@@ -18,12 +18,10 @@ const ItemListContainer = ({greeting, handlePage}) => {
             : collection(db, 'products')
 
         getDocs(collectionRef).then(response => {
-            //console.log(response)
             const products = response.docs.map(docs => {
                 return { id: docs.id, ...docs.data() }
                 
             })
-            console.log(products)
             setProducts(products)
         }).catch(error => {
             console.log(error)

@@ -1,5 +1,4 @@
 import { useState, createContext } from "react";
-
 const CartContext = createContext()
 
 export const CartContextProvider = ({ children }) => {
@@ -18,7 +17,7 @@ export const CartContextProvider = ({ children }) => {
                     }
                     return newProduct
                 } else {
-                   return prod 
+                    return prod 
                 }
             })
             setCart(newCart)

@@ -12,3 +12,5 @@ nav.navbar {box-shadow: 1px 1px 6px 0px #ccc;}
 .image-thumb {background-position: center;background-size: cover;}
 .outline {border-radius: 5px;border: 1px solid #ccc;}
 .total {display: inline-block;padding: 20px;border-radius: 5px;border: 1px solid #32a506;font-weight: 700;}
+.sinStock{color: red;}
+.alert {width: 50%;position: absolute;right: 20px;left: 0;margin: 20px 0 0 auto;}
